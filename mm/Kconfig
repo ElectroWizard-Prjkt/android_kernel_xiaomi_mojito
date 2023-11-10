@@ -571,7 +571,7 @@ config MEM_SOFT_DIRTY
 config ZSWAP
 	bool "Compressed cache for swap pages (EXPERIMENTAL)"
 	depends on FRONTSWAP && CRYPTO=y
-	depends on CRYPTO_LZ4 || CRYPTO_ZSTD || CRYPTO_LZO
+	depends on CRYPTO_LZ4 || CRYPTO_ZSTD || CRYPTO_LZO || CRYPTO_LZ4KD
 	select ZPOOL
 	select BTREE
 	default n
@@ -606,6 +606,10 @@ config ZSWAP_DEF_COMP_LZO
         bool "lzo"
         depends on CRYPTO_LZO
 
+config ZSWAP_DEF_COMP_LZ4KD
+        bool "lz4kd"
+        depends on CRYPTO_LZ4KD
+
 endchoice
 
 config ZSWAP_DEF_COMP
@@ -613,6 +617,7 @@ config ZSWAP_DEF_COMP
         default "lzo" if ZSWAP_DEF_COMP_LZO
         default "zstd" if ZSWAP_DEF_COMP_ZSTD
         default "lz4" if ZSWAP_DEF_COMP_LZ4
+        default "lz4kd" if ZSWAP_DEF_COMP_LZ4KD
 
 config ZPOOL
 	tristate "Common API for compressed memory storage"
