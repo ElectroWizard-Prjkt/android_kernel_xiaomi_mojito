@@ -1,18 +1,8 @@
-# Inheriting configs from ACK
-case ${COMPILER} in
-gcc)
-    _KERNEL_DIR=${KERNEL_DIR}
-    . ${KERNEL_DIR}/build.config.common.gcc
-    KERNEL_DIR=${_KERNEL_DIR}
-    . ${KERNEL_DIR}/build.config.aarch64.gcc
-    ;;
-*)
-    _KERNEL_DIR=${KERNEL_DIR}
-    . ${KERNEL_DIR}/build.config.common
-    KERNEL_DIR=${_KERNEL_DIR}
-    . ${KERNEL_DIR}/build.config.aarch64
-    ;;
-esac
+# Inheriting configs from kernel source
+_KERNEL_DIR=${KERNEL_DIR}
+. ${KERNEL_DIR}/build.config.common.gcc
+KERNEL_DIR=${_KERNEL_DIR}
+. ${KERNEL_DIR}/build.config.aarch64.gcc
 
 # Define kernel source and defconfig.
 DEFCONFIG=neternels_defconfig
